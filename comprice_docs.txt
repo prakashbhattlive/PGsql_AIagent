@@ -1,0 +1,81 @@
+📌 Purpose
+This document describes a cleaned, merged dataset of computer specifications and prices. It is designed for tabular regression tasks where the goal is to predict the price of a PC or laptop based on its hardware and configuration.
+📊 Dataset Overview
+- Size: ~100,000 rows
+- Type: Tabular, structured
+- Target column: price
+- Use case: Regression modeling, feature engineering, benchmarking
+🧠 Modeling Objectives
+LLMs or ML models using this dataset should be able to:
+- Engineer features from categorical and numeric data
+- Handle high-cardinality variables (e.g., brands, models)
+- Build robust regression models (e.g., tree-based, boosting, deep learning)
+- Efficiently manage large-scale tabular data
+📁 Feature Categories
+1. Device Information
+- device_type: Laptop or Desktop
+- brand, model
+- release_year, os, form_factor
+2. CPU Specifications
+- cpu_brand, cpu_model, cpu_tier
+- cpu_cores, cpu_threads
+- cpu_base_ghz, cpu_boost_ghz
+3. GPU Specifications
+- gpu_brand, gpu_model, gpu_tier
+- vram_gb
+4. Memory & Storage
+- ram_gb
+- storage_type, storage_gb, storage_drive_count
+5. Display Characteristics
+- display_type: LED, OLED, Mini-LED, IPS, VA, QLED
+- display_size_in, resolution, refresh_hz
+6. Other Features
+- battery_wh, charger_watts, psu_watts
+- wifi, bluetooth
+- weight_kg, warranty_months
+7. Target
+- price: Float (USD)
+🧪 Sample Row (Structured)
+{
+  "device_type": "Desktop",
+  "brand": "Samsung",
+  "model": "Samsung Forge XDI",
+  "release_year": 2022,
+  "os": "Windows",
+  "form_factor": "ATX",
+  "cpu_brand": "Intel",
+  "cpu_model": "Intel i5-11129",
+  "cpu_tier": 3,
+  "cpu_cores": 12,
+  "cpu_threads": 24,
+  "cpu_base_ghz": 2.8,
+  "cpu_boost_ghz": 3.8,
+  "gpu_brand": "NVIDIA",
+  "gpu_model": "RTX 40 60",
+  "gpu_tier": 2,
+  "vram_gb": 6,
+  "ram_gb": 16,
+  "storage_type": "NVMe",
+  "storage_gb": 1024,
+  "storage_drive_count": 1,
+  "display_type": "LED",
+  "display_size_in": 27,
+  "resolution": "2560x1440",
+  "refresh_hz": 90,
+  "battery_wh": 0,
+  "charger_watts": 0,
+  "psu_watts": 750,
+  "wifi": "Wi-Fi 6",
+  "bluetooth": "5.1",
+  "weight_kg": 11,
+  "warranty_months": 36,
+  "price": 1383.99
+}
+
+
+🧭 Instructional Use
+When users provide instructions (e.g., “Find all laptops with OLED displays and RTX GPUs under $1500”), this context allows the LLM to:
+- Understand the schema and column meanings
+- Parse constraints and filters correctly
+- Generate SQL queries, summaries, or recommendations
+- Respond with accurate, context-aware answers
