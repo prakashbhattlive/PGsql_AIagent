@@ -32,11 +32,11 @@ except ImportError:
     from langchain_ollama import ChatOllama, OllamaEmbeddings
     print("✓ langchain-ollama installed successfully")
 
-# FIXED: Import from langchain_community instead of langchain
+
 from langchain_community.vectorstores.pgvector import PGVector
 from langchain_community.utilities import SQLDatabase
-from langchain_community.document_loaders import TextLoader  # ✓ FIXED
-from langchain_text_splitters import RecursiveCharacterTextSplitter  # ✓ FIXED
+from langchain_community.document_loaders import TextLoader 
+from langchain_text_splitters import RecursiveCharacterTextSplitter 
 
 
 # ---------- LANGGRAPH AGENT IMPORTS ----------
@@ -203,6 +203,7 @@ tools = [
             "display_size_in, resolution, refresh_hz, battery_wh, charger_watts, "
             "psu_watts, wifi, bluetooth, weight_kg, warranty_months, price. "
             "Example: SELECT brand, model, price FROM devices WHERE brand='Samsung' AND release_year > 2021 LIMIT 10;"
+            "device_type can be 'Laptop', 'Desktop'."
         ),
     ),
 ]
