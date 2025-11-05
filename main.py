@@ -32,8 +32,12 @@ except ImportError:
     from langchain_ollama import ChatOllama, OllamaEmbeddings
     print("✓ langchain-ollama installed successfully")
 
+# FIXED: Import from langchain_community instead of langchain
 from langchain_community.vectorstores.pgvector import PGVector
 from langchain_community.utilities import SQLDatabase
+from langchain_community.document_loaders import TextLoader  # ✓ FIXED
+from langchain_text_splitters import RecursiveCharacterTextSplitter  # ✓ FIXED
+
 
 # ---------- LANGGRAPH AGENT IMPORTS ----------
 try:
@@ -64,7 +68,7 @@ DB_NAME = os.getenv("DB_NAME")
 OLLAMA_HOST = os.getenv("OLLAMA_HOST")
 OLLAMA_PORT = os.getenv("OLLAMA_PORT")
 OLLAMA_MODEL = os.getenv("OLLAMA_MODEL")
-
+OLLAMA_EMBED_MODEL = os.getenv("OLLAMA_EMBED_MODEL")
 if not all([DB_HOST, DB_USER, DB_PASSWORD, DB_NAME]):
     raise RuntimeError(
         "Missing required DB credentials. "
@@ -82,7 +86,7 @@ logger.info(f"Ollama URL: {OLLAMA_URL}")
 # ---------- EMBEDDINGS & LLM ----------
 # Using langchain-ollama for proper tool binding support
 embedding_model = OllamaEmbeddings(
-    model=OLLAMA_MODEL,
+    model=OLLAMA_EMBED_MODEL,
     base_url=OLLAMA_URL,
 )
 
@@ -94,11 +98,31 @@ llm = ChatOllama(
 )
 
 # ---------- PGVector ----------
+loader = TextLoader("comprice_docs.txt", encoding="utf-8")
+documents = loader.load()
+text_splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=50)
+docs = text_splitter.split_documents(documents)
+
+
 vectorstore = PGVector(
     connection_string=CONNECTION_STRING,
     collection_name="comprice_docs",
     embedding_function=embedding_model,
 )
+
+# IMPROVED: Only add documents if collection is empty
+try:
+    # Check if documents already exist
+    test_docs = vectorstore.similarity_search("test", k=1)
+    if len(test_docs) == 0:
+        logger.info("Adding documents to vector store...")
+        vectorstore.add_documents(docs)
+    else:
+        logger.info("Documents already exist in vector store, skipping...")
+except:
+    # If collection doesn't exist or error, add documents
+    logger.info("Initializing vector store with documents...")
+    vectorstore.add_documents(docs)
 
 retriever = vectorstore.as_retriever(search_kwargs={"k": 3})
 

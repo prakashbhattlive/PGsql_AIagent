@@ -1,4 +1,4 @@
-# ReAct Agent with Ollama, PGVector, and PostgreSQL
+# LLM Agent with Ollama, PGVector, and PostgreSQL
 
 A ready-to-run example demonstrating how to integrate an Ollama LLM, PGVector vector store, and a PostgreSQL devices table into a ReAct-style agent using LangChain 1.0.3 and LangGraph.
 

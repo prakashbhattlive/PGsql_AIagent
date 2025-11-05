@@ -1,81 +1,313 @@
-📌 Purpose
-This document describes a cleaned, merged dataset of computer specifications and prices. It is designed for tabular regression tasks where the goal is to predict the price of a PC or laptop based on its hardware and configuration.
-📊 Dataset Overview
-- Size: ~100,000 rows
-- Type: Tabular, structured
-- Target column: price
-- Use case: Regression modeling, feature engineering, benchmarking
-🧠 Modeling Objectives
-LLMs or ML models using this dataset should be able to:
-- Engineer features from categorical and numeric data
-- Handle high-cardinality variables (e.g., brands, models)
-- Build robust regression models (e.g., tree-based, boosting, deep learning)
-- Efficiently manage large-scale tabular data
-📁 Feature Categories
-1. Device Information
-- device_type: Laptop or Desktop
-- brand, model
-- release_year, os, form_factor
-2. CPU Specifications
-- cpu_brand, cpu_model, cpu_tier
-- cpu_cores, cpu_threads
-- cpu_base_ghz, cpu_boost_ghz
-3. GPU Specifications
-- gpu_brand, gpu_model, gpu_tier
-- vram_gb
-4. Memory & Storage
-- ram_gb
-- storage_type, storage_gb, storage_drive_count
-5. Display Characteristics
-- display_type: LED, OLED, Mini-LED, IPS, VA, QLED
-- display_size_in, resolution, refresh_hz
-6. Other Features
-- battery_wh, charger_watts, psu_watts
-- wifi, bluetooth
-- weight_kg, warranty_months
-7. Target
-- price: Float (USD)
-🧪 Sample Row (Structured)
-{
-  "device_type": "Desktop",
-  "brand": "Samsung",
-  "model": "Samsung Forge XDI",
-  "release_year": 2022,
-  "os": "Windows",
-  "form_factor": "ATX",
-  "cpu_brand": "Intel",
-  "cpu_model": "Intel i5-11129",
-  "cpu_tier": 3,
-  "cpu_cores": 12,
-  "cpu_threads": 24,
-  "cpu_base_ghz": 2.8,
-  "cpu_boost_ghz": 3.8,
-  "gpu_brand": "NVIDIA",
-  "gpu_model": "RTX 40 60",
-  "gpu_tier": 2,
-  "vram_gb": 6,
-  "ram_gb": 16,
-  "storage_type": "NVMe",
-  "storage_gb": 1024,
-  "storage_drive_count": 1,
-  "display_type": "LED",
-  "display_size_in": 27,
-  "resolution": "2560x1440",
-  "refresh_hz": 90,
-  "battery_wh": 0,
-  "charger_watts": 0,
-  "psu_watts": 750,
-  "wifi": "Wi-Fi 6",
-  "bluetooth": "5.1",
-  "weight_kg": 11,
-  "warranty_months": 36,
-  "price": 1383.99
-}
+COMPUTER DEVICE KNOWLEDGE BASE
+================================
+
+DEVICE TYPES AND CATEGORIES
+----------------------------
+
+Desktop Computers
+A desktop is a stationary computer designed for regular use at a single location. Desktops typically offer more power, expandability, and better cooling than laptops. They consist of separate components including a tower/case, monitor, keyboard, and mouse. Desktops are ideal for gaming, content creation, software development, and professional workstations.
+
+Laptop Computers
+Laptops are portable computers that integrate all components including screen, keyboard, touchpad, and battery into a single unit. They are designed for mobility and can run on battery power. Laptops range from ultraportable models weighing under 1kg to powerful gaming laptops weighing 2.5kg or more. Common categories include ultrabooks, business laptops, gaming laptops, and workstation laptops.
+
+Tablets
+Tablets are touchscreen mobile devices larger than smartphones but more portable than laptops. They typically run mobile operating systems like iOS, Android, or Windows. Tablets are ideal for media consumption, light productivity, digital art, and on-the-go computing. Some tablets support keyboard attachments for laptop-like functionality.
+
+2-in-1 Convertibles
+2-in-1 devices combine laptop and tablet functionality through either a detachable keyboard or a 360-degree hinge. They offer the productivity of a laptop with the flexibility of a tablet. These devices are popular for students, business travelers, and digital artists.
 
 
-🧭 Instructional Use
-When users provide instructions (e.g., “Find all laptops with OLED displays and RTX GPUs under $1500”), this context allows the LLM to:
-- Understand the schema and column meanings
-- Parse constraints and filters correctly
-- Generate SQL queries, summaries, or recommendations
-- Respond with accurate, context-aware answers
+CPU SPECIFICATIONS
+------------------
+
+CPU Tier System
+CPU tier is a classification system that ranks processors by performance level. Higher tiers indicate better performance. Common tiers include:
+- Entry (Tier 1-2): Basic computing, web browsing, office work
+- Mid-range (Tier 3-4): Multitasking, light gaming, content consumption
+- High-end (Tier 5-6): Gaming, content creation, professional software
+- Enthusiast (Tier 7-8): Heavy workloads, 3D rendering, video editing
+- Workstation (Tier 9-10): Professional applications, scientific computing, AI/ML
+
+CPU Brands
+The two major CPU manufacturers are Intel and AMD. Intel processors include Core i3, i5, i7, and i9 series. AMD offers Ryzen 3, 5, 7, and 9 series. Both companies produce processors for different market segments from budget to high-performance.
+
+CPU Cores and Threads
+CPU cores are independent processing units within a processor. More cores allow better multitasking and parallel processing. Threads are virtual cores created through technologies like Intel Hyperthreading or AMD SMT. A 6-core/12-thread CPU can handle 12 simultaneous tasks efficiently.
+
+CPU Clock Speed
+Clock speed measured in GHz indicates how many cycles per second a CPU can perform. Base clock is the standard operating frequency. Boost clock is the maximum speed under load. Higher clock speeds generally mean faster single-threaded performance, important for gaming and certain applications.
+
+CPU Performance Impact
+For laptops, CPU performance affects battery life, heat generation, and sustained performance. Higher-tier CPUs consume more power but offer better performance. For desktops, CPU choice impacts multitasking ability, application responsiveness, and gaming performance at high frame rates.
+
+
+GPU SPECIFICATIONS
+------------------
+
+GPU Tier System
+GPU tier ranks graphics processors by performance capability:
+- Integrated (Tier 1-2): Basic display, video playback, light tasks
+- Entry discrete (Tier 3-4): 1080p gaming, video editing, casual gaming
+- Mid-range (Tier 5-6): 1440p gaming, content creation, 3D rendering
+- High-end (Tier 7-8): 4K gaming, professional rendering, VR gaming
+- Enthusiast (Tier 9-10): 4K high refresh, AI workloads, professional 3D work
+
+GPU Brands
+NVIDIA and AMD are the main discrete GPU manufacturers. NVIDIA offers GeForce (gaming) and RTX (ray tracing) lines. AMD provides Radeon RX series. Intel produces Arc discrete GPUs and integrated graphics. For laptops, GPUs often have mobile variants with lower power consumption.
+
+VRAM (Video RAM)
+VRAM is dedicated memory for the GPU to store textures, frame buffers, and rendering data. More VRAM enables higher resolution textures, better multitasking with creative apps, and higher resolution gaming. Modern games at 1080p typically need 4-6GB VRAM, 1440p needs 6-8GB, and 4K gaming benefits from 10GB or more.
+
+GPU Performance Impact
+GPU performance determines gaming frame rates, video rendering speed, and 3D modeling responsiveness. In laptops, discrete GPUs significantly reduce battery life and generate more heat. In desktops, high-end GPUs require adequate power supply and cooling.
+
+
+MEMORY AND STORAGE
+------------------
+
+RAM (Random Access Memory)
+RAM is the computer's working memory for active processes and data. More RAM allows better multitasking and handling larger files. Typical configurations:
+- 8GB: Basic computing, web browsing, office work
+- 16GB: Gaming, multitasking, content consumption, light editing
+- 32GB: Content creation, professional software, heavy multitasking
+- 64GB+: Professional workstations, video editing, 3D rendering, virtual machines
+
+Storage Types
+SSD (Solid State Drive) uses flash memory for fast access with no moving parts. SSDs offer faster boot times, application loading, and file transfers. They are more durable and energy-efficient than HDDs but cost more per gigabyte.
+
+HDD (Hard Disk Drive) uses spinning magnetic platters for storage. HDDs offer higher capacity at lower cost but are slower and more fragile. They are common in desktops for mass storage.
+
+NVMe SSD is a type of SSD using PCIe interface for even faster speeds than SATA SSDs. NVMe drives are ideal for operating systems, applications, and active project files.
+
+Storage Drive Count
+Some systems have multiple drives, combining fast SSD for the OS with large HDD for storage. Dual-drive configurations are common in desktops and gaming laptops for balancing speed and capacity.
+
+
+DISPLAY TECHNOLOGY
+------------------
+
+Display Types
+IPS (In-Plane Switching) offers wide viewing angles and accurate colors, ideal for professional work and content creation.
+
+TN (Twisted Nematic) provides fast response times and high refresh rates, preferred for competitive gaming, but has limited viewing angles.
+
+OLED (Organic LED) delivers true blacks, infinite contrast, and vibrant colors. OLED displays are premium options for content creators and media enthusiasts.
+
+VA (Vertical Alignment) offers good contrast ratios and deeper blacks than IPS, commonly used in budget to mid-range displays.
+
+Display Resolution
+Resolution determines pixel count and image sharpness:
+- 1920x1080 (Full HD/1080p): Standard for most laptops and monitors
+- 2560x1440 (QHD/1440p): Higher detail, popular for 27-inch monitors
+- 3840x2160 (4K/UHD): Professional work, large displays, high-end laptops
+Higher resolutions provide sharper images but require more GPU power and reduce battery life in laptops.
+
+Refresh Rate
+Refresh rate (Hz) indicates how many times per second the display updates. Standard displays are 60Hz. Gaming displays offer 120Hz, 144Hz, 165Hz, or 240Hz+ for smoother motion and reduced input lag. Higher refresh rates benefit fast-paced gaming and improve overall system responsiveness.
+
+
+POWER AND BATTERY
+-----------------
+
+Battery Capacity (Wh)
+Battery capacity measured in watt-hours determines runtime. Larger batteries provide longer usage between charges:
+- 40-50Wh: Ultraportable laptops, 4-6 hours typical use
+- 50-70Wh: Standard laptops, 6-8 hours typical use
+- 70-90Wh: Premium laptops, 8-12 hours typical use
+- 90Wh+: Maximum laptop battery capacity, 10-15+ hours
+
+Actual battery life depends on usage, screen brightness, CPU/GPU load, and power management settings.
+
+Charger Wattage
+Charger wattage indicates power delivery capacity. Higher wattage chargers enable faster charging and can power more demanding systems:
+- 45-65W: Ultrabooks, basic laptops
+- 65-100W: Standard laptops, some gaming laptops
+- 100-150W: Gaming laptops, mobile workstations
+- 150W+: High-performance gaming laptops
+
+PSU (Power Supply Unit) Wattage
+For desktops, PSU wattage must exceed total system power draw. Common PSU ratings:
+- 450-550W: Basic systems, integrated graphics
+- 550-750W: Mid-range gaming, single GPU
+- 750-850W: High-end gaming, powerful GPUs
+- 850W+: Enthusiast builds, multiple GPUs, overclocking
+
+
+CONNECTIVITY
+------------
+
+WiFi Standards
+WiFi generations determine wireless network speed and range:
+- WiFi 5 (802.11ac): Up to 3.5 Gbps, older standard
+- WiFi 6 (802.11ax): Up to 9.6 Gbps, better efficiency, reduced latency
+- WiFi 6E: Extends WiFi 6 to 6GHz band for less congestion
+- WiFi 7: Latest standard with multi-gigabit speeds and ultra-low latency
+
+Bluetooth Versions
+Bluetooth enables wireless peripherals and audio devices:
+- Bluetooth 4.2: Basic connectivity, older standard
+- Bluetooth 5.0: Double range and speed over 4.2
+- Bluetooth 5.1: Direction finding, better location services
+- Bluetooth 5.2: LE Audio, improved efficiency
+- Bluetooth 5.3: Latest version with enhanced reliability
+
+
+FORM FACTORS
+-------------
+
+Desktop Form Factors
+Desktop computers come in various sizes:
+- Full Tower: Largest, maximum expandability, 20+ inches tall
+- Mid Tower: Standard size, good balance, 18-20 inches
+- Mini Tower: Compact, limited expansion, 12-15 inches
+- Small Form Factor (SFF): Very compact, specialized motherboards
+- Mini PC: Tiny desktops, similar size to external drives
+
+Laptop Form Factors
+Laptops vary in size and portability:
+- Ultraportable: 11-13 inch, under 1.2kg, extreme portability
+- Standard: 13-15 inch, 1.2-2kg, balanced portability and usability
+- Desktop Replacement: 15-17 inch, 2-3kg, powerful but less portable
+- Mobile Workstation: 15-17 inch, 2.5-3.5kg, professional performance
+
+
+OPERATING SYSTEMS
+-----------------
+
+Windows
+Microsoft Windows is the most common desktop OS. Windows 11 is the current version offering gaming support, broad software compatibility, and business features. Windows is available in Home, Pro, and Enterprise editions with varying features.
+
+macOS
+Apple's operating system for Mac computers. macOS is known for creative professional software, intuitive interface, and integration with Apple ecosystem. It runs on Apple Silicon (M-series) or Intel processors.
+
+Linux
+Open-source operating systems including Ubuntu, Fedora, and others. Linux is popular for development, servers, and customization. It's free and offers strong privacy and security.
+
+Chrome OS
+Google's lightweight OS for Chromebooks. Chrome OS focuses on web applications and cloud storage, ideal for education and basic computing needs.
+
+
+WARRANTY AND SUPPORT
+--------------------
+
+Warranty Duration
+Warranty coverage protects against manufacturing defects and failures. Common warranty periods:
+- 12 months (1 year): Standard consumer warranty
+- 24 months (2 years): Extended coverage, common in business laptops
+- 36 months (3 years): Premium coverage, professional systems
+- 48+ months: Enterprise-grade, extended service contracts
+
+Warranty typically covers hardware failures but not accidental damage, liquid spills, or user-caused issues. Some manufacturers offer additional accidental damage protection.
+
+
+DEVICE SELECTION GUIDANCE
+--------------------------
+
+Choosing for Gaming
+Gaming requires balanced CPU and GPU performance. Prioritize:
+- GPU tier 5+ for modern games at 1080p
+- CPU with 6+ cores for optimal frame rates
+- 16GB RAM minimum, 32GB for future-proofing
+- Fast SSD for reduced loading times
+- High refresh rate display (120Hz+)
+- Adequate cooling and power delivery
+
+Choosing for Content Creation
+Content creation demands strong CPU and adequate RAM:
+- Photo editing: 16GB RAM, color-accurate display, GPU tier 3+
+- Video editing: 32GB RAM, strong CPU (8+ cores), GPU tier 5+, fast NVMe SSD
+- 3D modeling: 32GB+ RAM, GPU tier 6+, high core count CPU
+- Music production: Strong CPU, 16GB+ RAM, low-latency audio
+
+Choosing for Business/Productivity
+Business use prioritizes reliability and battery life:
+- 16GB RAM for multitasking
+- SSD for fast boot and application loading
+- Good keyboard and trackpad
+- Long battery life (8+ hours)
+- Lightweight for portability (under 1.5kg)
+- Professional design and build quality
+
+Choosing for Students
+Student needs vary but generally include:
+- Portable design (under 1.8kg)
+- All-day battery life
+- Sufficient performance for coursework
+- 8-16GB RAM depending on major
+- Durable construction
+- Affordable price point
+
+Price vs. Performance Balance
+Budget considerations affect component choices:
+- Entry level ($300-600): Basic tasks, web browsing, office work
+- Mid-range ($600-1200): Gaming, multitasking, content consumption
+- High-end ($1200-2000): Professional work, serious gaming, content creation
+- Premium ($2000+): Maximum performance, professional workstations, flagship devices
+
+
+TECHNICAL TERMINOLOGY
+---------------------
+
+Base Clock vs. Boost Clock
+Base clock is the guaranteed minimum CPU frequency. Boost clock is the maximum speed the CPU can reach under load with adequate cooling and power. Sustained boost performance varies by cooling solution and power limits.
+
+Thermal Design Power (TDP)
+TDP indicates the maximum heat a component generates under load. Lower TDP means better efficiency and less cooling required. Mobile processors typically have 15-45W TDP, desktop processors range from 65-250W TDP.
+
+Integrated vs. Discrete Graphics
+Integrated graphics are built into the CPU, sharing system RAM. They are power-efficient and adequate for basic tasks. Discrete graphics are separate GPU chips with dedicated VRAM, offering significantly better performance for gaming and professional applications.
+
+PCIe Generations
+PCIe is the interface connecting components like GPUs and NVMe SSDs. Each generation doubles bandwidth:
+- PCIe 3.0: 1GB/s per lane, older standard
+- PCIe 4.0: 2GB/s per lane, current mainstream
+- PCIe 5.0: 4GB/s per lane, latest high-end systems
+
+Dual Channel vs. Single Channel RAM
+Dual channel RAM uses two memory modules simultaneously, doubling bandwidth. This provides 10-20% better performance than single channel. Most systems support dual channel, but all slots must be populated in pairs.
+
+
+MAINTENANCE AND UPGRADES
+------------------------
+
+Upgradability
+Desktops offer maximum upgradability with replaceable CPU, GPU, RAM, storage, and power supply. Laptops have limited upgradability, typically only RAM and storage. Modern ultrabooks often have soldered components that cannot be upgraded.
+
+Thermal Management
+Proper cooling extends component life and maintains performance. Desktop cooling includes air coolers and liquid cooling. Laptop cooling relies on heat pipes and fans. Regular cleaning prevents dust buildup that reduces cooling efficiency.
+
+Performance Degradation
+Computer performance can degrade over time due to:
+- Thermal paste degradation (3-5 years)
+- Dust accumulation reducing cooling
+- Software bloat and background processes
+- Storage drive wear and fragmentation
+- Battery capacity loss in laptops (300-500 charge cycles)
+
+Component Lifespan
+Expected lifespan varies by component:
+- CPU: 10-20 years (functionally obsolete before failure)
+- GPU: 5-10 years
+- RAM: 10+ years
+- SSD: 5-10 years depending on write cycles
+- HDD: 3-5 years (mechanical failure risk)
+- Laptop battery: 2-4 years (capacity loss)
+
+
+CURRENT MARKET TRENDS
+---------------------
+
+Latest Technologies
+- DDR5 RAM replacing DDR4 for newer systems
+- PCIe 5.0 adoption increasing bandwidth
+- WiFi 6E and WiFi 7 for faster wireless
+- USB4 and Thunderbolt 4 for universal connectivity
+- ARM-based processors (Apple Silicon) challenging x86 dominance
+- Ray tracing in mid-range and high-end GPUs
+- AI-powered features in CPUs and GPUs
+
+Value Considerations
+Best value often found in previous generation hardware as new products launch. Mid-range components typically offer better price-to-performance than flagship products. Consider actual usage needs rather than maximum specifications.
+
+Release Year Impact
+Newer devices offer latest features and longer support life. However, 1-2 year old devices often provide excellent value at reduced prices. Consider balancing cutting-edge features against cost savings from older models.
