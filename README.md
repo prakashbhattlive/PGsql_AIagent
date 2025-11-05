@@ -20,6 +20,7 @@ This project showcases a modular LangChain agent architecture that:
 | PostgreSQL    | 18.1.3         | Relational database for device metadata  |
 | PGVector      | Compatible     | Vector store extension for PostgreSQL    |
 
+
 ## 🚀 Getting Started
 
 ### Prerequisites
@@ -35,7 +36,21 @@ Database view:
 
 
 
-OutCome with details logs:
-<img width="906" height="604" alt="image" src="https://github.com/user-attachments/assets/4005f07e-e3f1-4216-9707-cf5914ece239" />
-<img width="970" height="603" alt="image" src="https://github.com/user-attachments/assets/facb9fe9-0034-412c-b9b5-a61f173138a4" />
-<img width="936" height="541" alt="image" src="https://github.com/user-attachments/assets/798021e0-5b39-4490-a1b7-fbfc8ee6ce11" />
+## OutCome with detailed logs:
+
+### Case1:
+- EMBED_MODEL: **mxbai-embed-large:latest**
+- LLM_MODEL: **mistral:latest**
+
+  <img width="947" height="500" alt="image" src="https://github.com/user-attachments/assets/c4af8b5b-f783-49f1-88a9-5bc7618d6527" />
+  <img width="945" height="503" alt="image" src="https://github.com/user-attachments/assets/b00891ee-8bce-40bd-8636-48ae6aa3f882" />
+  <img width="956" height="545" alt="image" src="https://github.com/user-attachments/assets/45d421d3-0363-40c3-b74c-172e505fcaa6" />
+
+
+### Case2:
+- EMBED_MODEL: **mxbai-embed-large:latest**
+- LLM_MODEL: **gpt-oss:20b**
+
+  <img width="940" height="599" alt="image" src="https://github.com/user-attachments/assets/da7ad8a4-dba7-410c-9ffa-0a3b59542f01" />
+  <img width="939" height="587" alt="image" src="https://github.com/user-attachments/assets/60763725-2f5e-453d-b2d1-7ae279400bf7" />
+  <img width="938" height="636" alt="image" src="https://github.com/user-attachments/assets/e7f7c526-6fbc-466e-867c-88bf24b6ea91" />
