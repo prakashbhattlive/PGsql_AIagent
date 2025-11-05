@@ -28,6 +28,7 @@ This project showcases a modular LangChain agent architecture that:
 - Python 3.10+
 - PostgreSQL with PGVector extension
 - Ollama installed and running locally or you can use OpenAI or any other public inference
+- **DataSet** https://www.kaggle.com/datasets/paperxd/all-computer-prices/data
 
 
 Database view:
